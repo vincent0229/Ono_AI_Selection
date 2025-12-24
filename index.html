@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小野 AI 甄选 - AI 新知・童言童语</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <span class="logo-text">小野</span>
+                <span class="logo-sub">AI 甄选</span>
+            </div>
+            <div class="search-box">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" id="headerSearch" placeholder="搜索标题、嘉宾、金句...">
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="hero">
+                <h2>小野 AI 甄选</h2>
+                <p>把 AI 领域的最新洞察<br>用孩子们能听懂的语言呈现出来</p>
+            </section>
+
+            <section class="category-filter" id="categoryFilter">
+                <a href="#" class="filter-link" data-category="AI Coding">AI Coding</a>
+                <a href="#" class="filter-link" data-category="AI Products">AI Products</a>
+                <a href="#" class="filter-link" data-category="AI Organization">AI Organization</a>
+                <a href="#" class="filter-link" data-category="AI Business">AI Business</a>
+                <a href="#" class="filter-link" data-category="AI Principles">AI Principles</a>
+                <a href="#" class="filter-link" data-category="Personal Productivity">Personal Productivity</a>
+                <a href="#" class="filter-link" data-category="Physical AI">Physical AI</a>
+            </section>
+
+            <div class="content-grid" id="contentGrid">
+                <!-- 内容卡片将通过JavaScript动态生成 -->
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>加载中...</p>
+            </div>
+
+            <div class="no-results" id="noResults" style="display: none;">
+                <p>没有找到相关内容</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 小野 AI 甄选 - AI 新知・童言童语</p>
+        </div>
+    </footer>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
