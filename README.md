@@ -88,27 +88,36 @@ A: Vercel 控制台 → Deployments → 选择最新部署 → View Function Log
 ## 📁 项目结构
 
 ```
-├── index.html          # 首页
-├── detail.html         # 详情页
-├── diagnostic.html     # 诊断工具
-├── styles.css          # 样式文件
-├── script.js           # 前端逻辑
-├── server.js           # 服务器入口
-├── vercel.json         # Vercel 配置
+├── public/             # 静态文件目录
+│   ├── index.html      # 首页
+│   ├── detail.html     # 详情页
+│   ├── styles.css      # 样式文件
+│   ├── script.js       # 前端逻辑
+│   ├── favicon.svg     # 网站图标
+│   ├── test.html       # 资源测试页
+│   └── diagnostic.html # 诊断工具
 ├── routes/             # API 路由
 │   ├── contents.js     # 内容接口
 │   ├── categories.js   # 分类接口
 │   └── proxy.js        # 图片代理
 ├── services/           # 业务逻辑
 │   └── feishuService.js # 飞书服务
-└── utils/              # 工具函数
-    └── errorHandler.js # 错误处理
+├── utils/              # 工具函数
+│   └── errorHandler.js # 错误处理
+├── config/             # 配置文件
+│   └── feishu.js       # 飞书配置
+├── server.js           # 服务器入口
+├── vercel.json         # Vercel 配置
+└── package.json        # 项目依赖
 ```
+
+详细说明请查看 [PROJECT_STRUCTURE.md](./PROJECT_STRUCTURE.md)
 
 ## 📚 更多文档
 
 - [详细部署指南](./DEPLOYMENT.md)
 - [产品需求文档](./PRD.MD)
+- [项目结构说明](./PROJECT_STRUCTURE.md)
 
 ## 🛠️ 技术栈
 
