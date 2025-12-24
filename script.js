@@ -91,6 +91,9 @@ class ContentPlatform {
             console.log('Using mock data due to error');
             // 使用模拟数据
             this.allContent = this.getMockData();
+            // 提取并去重分类标签
+            this.updateCategoryTags();
+            console.log('Category tags updated');
         } finally {
             console.log('Hiding loading indicator');
             this.showLoading(false);
