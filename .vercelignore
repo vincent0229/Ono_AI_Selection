@@ -1,0 +1,16 @@
+# 开发文件
+.env
+.env.local
+.DS_Store
+
+# 文档
+PRD.MD
+README.md
+
+# IDE
+.vscode/
+.idea/
+
+# 临时文件
+*.log
+*.tmp
