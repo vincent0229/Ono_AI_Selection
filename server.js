@@ -6,6 +6,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 // 导入路由
 const contentsRouter = require('./routes/contents');
@@ -35,6 +36,11 @@ app.get('/api/health', (req, res) => {
         timestamp: new Date().toISOString(),
         env: process.env.NODE_ENV || 'development'
     });
+});
+
+// 根路径路由
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // 错误处理中间件（必须放在所有路由之后）
