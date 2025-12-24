@@ -3,7 +3,7 @@
 ## 1. 项目概述
 
 ### 1.1 项目背景
-参考网站 `https://aihuangshu.com/`，实现一个AI精选内容平台，帮助用户从海量信息中过滤噪音，5分钟获取优质访谈里的深度洞察。
+实现一个AI精选内容平台，帮助用户从海量信息中过滤噪音，5分钟获取优质访谈里的深度洞察。
 
 ### 1.2 核心功能
 - 内容列表展示
@@ -175,7 +175,7 @@
         <div class="container">
             <div class="hero">
                 <h1>小野 AI 甄选</h1>
-                <p>黄叔精选+AI生成，帮你从海量信息中过滤噪音。<br>5 分钟 获取优质访谈里的深度洞察。</p>
+                <p>把 AI 领域的最新洞察<br>用孩子们能听懂的语言呈现出来</p>
                 <div class="search-box search-box-large">
                     <input type="text" placeholder="搜索 AI 行业洞察、金句、嘉宾...">
                 </div>
@@ -480,8 +480,8 @@ class ContentPlatform {
                     "频道": "AI Business",
                     "发布日期": "2025年12月23日",
                     "视频时长": "45:30",
-                    "封面": "https://aihuangshu.com/api/image?token=WW0TbprfAoN49AxzMCHcHapRnBg",
-                    "URL": "https://aihuangshu.com/content/recv69y0K7HLcN",
+                    "封面": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+                    "URL": "https://www.youtube.com/watch?v=example1",
                     "状态": "已发布",
                     "文章主体": "完整文章内容...",
                     "精彩金句": "在我看来所有的人类的历史，它本质上是一种某种程度的流量……",
@@ -495,7 +495,7 @@ class ContentPlatform {
                     "发布日期": "2025年12月21日",
                     "视频时长": "38:45",
                     "封面": "https://img.youtube.com/vi/J9982NLmTXg/maxresdefault.jpg",
-                    "URL": "https://aihuangshu.com/content/recv61s4MX5dC2",
+                    "URL": "https://www.youtube.com/watch?v=example2",
                     "状态": "已发布",
                     "文章主体": "完整文章内容...",
                     "精彩金句": "AI guardrails do not work. I'm gonna say that one more time. Guardrails do not work...",
