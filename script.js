@@ -16,11 +16,17 @@ class ContentPlatform {
     }
 
     async init() {
+        console.log('Starting init...');
         await this.fetchData();
+        console.log('Data fetched successfully');
         this.setupEventListeners();
+        console.log('Event listeners set up');
         this.selectFirstAvailableCategory();
+        console.log('First category selected');
         this.applyFilters();
+        console.log('Filters applied');
         this.renderContent();
+        console.log('Content rendered');
     }
 
     selectFirstAvailableCategory() {
@@ -48,16 +54,22 @@ class ContentPlatform {
     }
 
     async fetchData() {
+        console.log('Starting fetchData...');
         this.showLoading(true);
 
         try {
+            console.log('Fetching data from /api/contents...');
             // 从后端API获取数据
             const response = await fetch('/api/contents');
+            console.log('API response received:', response.status);
             const result = await response.json();
+            console.log('API data parsed:', result);
 
             if (result.code === 0 && result.data.length > 0) {
+                console.log('Using real data from API:', result.data.length, 'items');
                 this.allContent = result.data;
             } else {
+                console.log('Using mock data (API returned empty or error)');
                 // 使用模拟数据作为后备
                 this.allContent = this.getMockData();
             }
@@ -68,15 +80,19 @@ class ContentPlatform {
                 const dateB = new Date(this.parseDate(b.发布日期));
                 return dateB - dateA;
             });
+            console.log('Data sorted by date');
 
             // 提取并去重分类标签
             this.updateCategoryTags();
+            console.log('Category tags updated');
 
         } catch (error) {
-            console.error('获取数据失败:', error);
+            console.error('Error in fetchData:', error);
+            console.log('Using mock data due to error');
             // 使用模拟数据
             this.allContent = this.getMockData();
         } finally {
+            console.log('Hiding loading indicator');
             this.showLoading(false);
         }
     }
