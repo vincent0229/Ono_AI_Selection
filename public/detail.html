@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内容详情 - 小野 AI 甄选</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 详情页特定样式 */
+        .detail-container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 30px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background-color: #f0f0f0;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .detail-header {
+            margin-bottom: 40px;
+        }
+
+        .detail-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .detail-category {
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: #ff6b35;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 15px;
+        }
+
+        .detail-date {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .detail-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--text-color);
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .detail-guest {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .detail-guest-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b35, #ff8c5a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .detail-cover {
+            width: 100%;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .detail-cover img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background-color: #ff6b35;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            margin-bottom: 40px;
+            transition: all 0.3s;
+        }
+
+        .video-link:hover {
+            background-color: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .content-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ff6b35;
+            display: inline-block;
+        }
+
+        .section-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            text-indent: 0;
+        }
+
+        .section-content p {
+            margin-bottom: 1.5em;
+        }
+
+        .section-content strong {
+            color: #ff6b35;
+            font-weight: 600;
+        }
+
+        .quote-section {
+            background: linear-gradient(135deg, #fff8f5 0%, #fff0e8 100%);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .quote-text {
+            font-size: 18px;
+            font-style: italic;
+            line-height: 1.8;
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        .insights-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .insights-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .insights-list li:last-child {
+            border-bottom: none;
+        }
+
+        .insight-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #ff6b35;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 12px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .insight-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .loading-detail {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        @media (max-width: 768px) {
+            .detail-title {
+                font-size: 26px;
+            }
+
+            .detail-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .quote-text {
+                font-size: 16px;
+            }
+
+            .section-content {
+                font-size: 17px;
+                line-height: 1.7;
+            }
+
+            .section-content p {
+                margin-bottom: 1.2em;
+            }
+        }
+
+        /* 页面内搜索样式 */
+        .search-box {
+            position: relative;
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .clear-search:hover {
+            background-color: #f0f0f0;
+            color: var(--text-color);
+        }
+
+        /* 搜索高亮样式 */
+        .search-highlight {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        .search-highlight.current {
+            background-color: #ff6b35;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">小野</span>
+                <span class="logo-sub">AI 甄选</span>
+            </a>
+            <div class="search-box">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" id="pageSearch" placeholder="在当前文章中搜索...">
+                <button class="clear-search" id="clearSearch" style="display: none;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="detail-container">
+            <a href="index.html" class="back-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+                返回列表
+            </a>
+
+            <div id="detailContent">
+                <div class="loading-detail">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 小野 AI 甄选 - AI 新知・童言童语</p>
+        </div>
+    </footer>
+
+    <script>
+        // 详情页数据加载
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDetailContent();
+        });
+
+        function loadDetailContent() {
+            const contentEl = document.getElementById('detailContent');
+
+            // 从sessionStorage获取数据
+            const dataStr = sessionStorage.getItem('currentContent');
+
+            if (!dataStr) {
+                contentEl.innerHTML = `
+                    <div class="no-results">
+                        <p>无法加载内容，请返回首页重新选择</p>
+                        <a href="index.html" class="back-btn" style="margin-top: 20px;">返回首页</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const item = JSON.parse(dataStr);
+
+            // 更新页面标题
+            document.title = `${item.标题} - 小野 AI 甄选`;
+
+            // 获取嘉宾首字母
+            const guestInitial = item.嘉宾 ? item.嘉宾.charAt(0).toUpperCase() : '?';
+
+            // 解析并格式化日期
+            function formatDate(dateStr) {
+                if (!dateStr) return '';
+                const match = dateStr.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+                if (match) {
+                    return `${match[1]}年${match[2]}月${match[3]}日`;
+                }
+                const match2 = dateStr.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
+                if (match2) {
+                    return `${match2[1]}年${match2[2]}月${match2[3]}日`;
+                }
+                return dateStr;
+            }
+
+            // 渲染内容
+            contentEl.innerHTML = `
+                <header class="detail-header">
+                    <div class="detail-meta">
+                        <span class="detail-category">${item.频道}</span>
+                        <span class="detail-date">${formatDate(item.发布日期)}</span>
+                    </div>
+                    <h1 class="detail-title">${item.标题}</h1>
+                    <div class="detail-guest">
+                        <div class="detail-guest-avatar">${guestInitial}</div>
+                        <span>${item.嘉宾}</span>
+                    </div>
+                </header>
+
+                ${item.封面 ? `
+                <div class="detail-cover">
+                    <img src="${item.封面.includes('open.feishu.cn') ? '/api/image-proxy?url=' + encodeURIComponent(item.封面) : item.封面}" alt="${item.标题}" onerror="this.style.display='none'">
+                </div>
+                ` : ''}
+
+                ${item.URL && item.URL !== '#' ? `
+                <a href="${item.URL}" target="_blank" rel="noopener noreferrer" class="video-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    观看原视频
+                </a>
+                ` : ''}
+
+                ${item.文章主体 ? `
+                <section class="content-section">
+                    <h2 class="section-title">正文内容</h2>
+                    <div class="section-content">
+                        ${formatContent(item.文章主体)}
+                    </div>
+                </section>
+                ` : ''}
+
+                ${item.精彩金句 ? `
+                <section class="content-section">
+                    <h2 class="section-title">金句摘录</h2>
+                    <div class="quote-section">
+                        <p class="quote-text">"${item.精彩金句}"</p>
+                    </div>
+                </section>
+                ` : ''}
+
+                ${item.关键洞察 ? `
+                <section class="content-section">
+                    <h2 class="section-title">关键洞察</h2>
+                    <ul class="insights-list">
+                        ${formatInsights(item.关键洞察)}
+                    </ul>
+                </section>
+                ` : ''}
+            `;
+        }
+
+        function formatContent(content) {
+            // 简单处理富文本内容
+            if (!content) return '';
+
+            // 如果是纯文本，保留换行
+            if (!content.includes('<')) {
+                // 处理 Markdown 加粗语法 **text**
+                let processedContent = content.replace(/\*\*([^*]+)\*\*/g, '<strong style="color: #ff6b35;">$1</strong>');
+
+                // 转换为段落
+                return processedContent.split('\n').map(p => p.trim()).filter(p => p).map(p => `<p>${p}</p>`).join('');
+            }
+
+            // 否则直接返回（假设已经是HTML格式）
+            return content;
+        }
+
+        function formatInsights(insights) {
+            if (!insights) return '';
+
+            // 按序号分割：支持 "1. "、"1、"、"①" 等格式
+            const segments = insights.split(/(?=\d+[.、．]|\s)/).filter(s => s.trim());
+
+            // 处理 Markdown 加粗语法 **text**
+            function processBold(text) {
+                return text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+            }
+
+            if (segments.length <= 1) {
+                // 如果没有序号，直接返回单条
+                return `
+                    <li>
+                        <span class="insight-icon">✓</span>
+                        <span class="insight-text">${processBold(insights)}</span>
+                    </li>
+                `;
+            }
+
+            // 渲染多条洞察
+            return segments.map(segment => `
+                <li>
+                    <span class="insight-icon">✓</span>
+                    <span class="insight-text">${processBold(segment.trim())}</span>
+                </li>
+            `).join('');
+        }
+
+        // 页面内搜索功能
+        let searchMatches = [];
+        let currentMatchIndex = -1;
+
+        function initPageSearch() {
+            const searchInput = document.getElementById('pageSearch');
+            const clearBtn = document.getElementById('clearSearch');
+
+            if (!searchInput) return;
+
+            // 输入事件 - 实时搜索
+            searchInput.addEventListener('input', (e) => {
+                const keyword = e.target.value.trim();
+
+                // 显示/隐藏清除按钮
+                clearBtn.style.display = keyword ? 'flex' : 'none';
+
+                if (keyword.length >= 2) {
+                    performPageSearch(keyword);
+                } else {
+                    clearHighlights();
+                }
+            });
+
+            // 回车键 - 跳转到下一个匹配
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && searchMatches.length > 0) {
+                    jumpToNextMatch();
+                }
+            });
+
+            // 清除按钮
+            clearBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                clearBtn.style.display = 'none';
+                clearHighlights();
+                searchInput.focus();
+            });
+        }
+
+        function performPageSearch(keyword) {
+            clearHighlights();
+            searchMatches = [];
+            currentMatchIndex = -1;
+
+            const contentEl = document.getElementById('detailContent');
+            if (!contentEl) return;
+
+            const lowerKeyword = keyword.toLowerCase();
+
+            // 遍历所有文本节点
+            highlightTextNodes(contentEl, lowerKeyword);
+
+            // 如果有匹配，跳转到第一个
+            if (searchMatches.length > 0) {
+                currentMatchIndex = 0;
+                updateCurrentHighlight();
+            }
+        }
+
+        function highlightTextNodes(element, keyword) {
+            // 跳过script和style标签
+            if (element.tagName === 'SCRIPT' || element.tagName === 'STYLE') {
+                return;
+            }
+
+            // 处理文本节点
+            if (element.nodeType === Node.TEXT_NODE) {
+                const text = element.textContent;
+                const lowerText = text.toLowerCase();
+
+                if (lowerText.includes(keyword)) {
+                    const span = document.createElement('span');
+                    let lastIndex = 0;
+                    let index = lowerText.indexOf(keyword);
+
+                    while (index !== -1) {
+                        // 添加匹配前的文本
+                        if (index > lastIndex) {
+                            span.appendChild(document.createTextNode(text.substring(lastIndex, index)));
+                        }
+
+                        // 添加高亮的匹配文本
+                        const highlight = document.createElement('span');
+                        highlight.className = 'search-highlight';
+                        highlight.textContent = text.substring(index, index + keyword.length);
+                        span.appendChild(highlight);
+                        searchMatches.push(highlight);
+
+                        lastIndex = index + keyword.length;
+                        index = lowerText.indexOf(keyword, lastIndex);
+                    }
+
+                    // 添加剩余文本
+                    if (lastIndex < text.length) {
+                        span.appendChild(document.createTextNode(text.substring(lastIndex)));
+                    }
+
+                    element.parentNode.replaceChild(span, element);
+                }
+            } else {
+                // 递归处理子节点
+                Array.from(element.childNodes).forEach(child => {
+                    highlightTextNodes(child, keyword);
+                });
+            }
+        }
+
+        function clearHighlights() {
+            searchMatches = [];
+            currentMatchIndex = -1;
+
+            const highlights = document.querySelectorAll('.search-highlight');
+            highlights.forEach(highlight => {
+                const parent = highlight.parentNode;
+                const text = document.createTextNode(highlight.textContent);
+                parent.replaceChild(text, highlight);
+
+                // 合并相邻的文本节点
+                parent.normalize();
+            });
+        }
+
+        function jumpToNextMatch() {
+            if (searchMatches.length === 0) return;
+
+            currentMatchIndex = (currentMatchIndex + 1) % searchMatches.length;
+            updateCurrentHighlight();
+        }
+
+        function updateCurrentHighlight() {
+            // 移除所有current类
+            searchMatches.forEach(match => match.classList.remove('current'));
+
+            // 添加current类到当前匹配
+            if (currentMatchIndex >= 0 && currentMatchIndex < searchMatches.length) {
+                const currentMatch = searchMatches[currentMatchIndex];
+                currentMatch.classList.add('current');
+
+                // 滚动到当前匹配位置
+                currentMatch.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        }
+
+        // 在页面加载完成后初始化搜索功能
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDetailContent();
+            // 延迟初始化搜索，确保内容已加载
+            setTimeout(initPageSearch, 500);
+        });
+    </script>
+</body>
+
+</html>

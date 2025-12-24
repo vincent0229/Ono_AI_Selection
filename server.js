@@ -22,7 +22,6 @@ const PORT = process.env.PORT || 3000;
 // 中间件
 app.use(cors());
 app.use(express.json());
-app.use(express.static(__dirname));
 
 // 注册路由
 app.use('/api/contents', contentsRouter);
@@ -36,11 +35,6 @@ app.get('/api/health', (req, res) => {
         timestamp: new Date().toISOString(),
         env: process.env.NODE_ENV || 'development'
     });
-});
-
-// 根路径路由
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // 错误处理中间件（必须放在所有路由之后）
