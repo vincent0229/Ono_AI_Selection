@@ -23,6 +23,9 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// 静态文件服务
+app.use(express.static(path.join(__dirname, 'public')));
+
 // 注册路由
 app.use('/api/contents', contentsRouter);
 app.use('/api/categories', categoriesRouter);
